@@ -1,6 +1,9 @@
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
@@ -24,14 +27,15 @@ public class GreeterTest {
     public void deadlock() throws InterruptedException {
 
         ExecutorService executor = Executors.newFixedThreadPool(REPETITIONS);
-
+        List<String> recorder = Collections.synchronizedList(new ArrayList<>());
         for (int i = 0; i < REPETITIONS; i++) {
-            executor.execute(() -> jack.greet(jill));
-            executor.execute(() -> jill.greet(jack));
+            executor.execute(() -> jack.greet(jill, recorder));
+            executor.execute(() -> jill.greet(jack, recorder));
         }
 
         executor.shutdown();
-        boolean allJobsCompleted = executor.awaitTermination(1, TimeUnit.SECONDS);
+        boolean allJobsCompleted = executor.awaitTermination(5, TimeUnit.SECONDS);
         assertThat("Deadlock detected", allJobsCompleted, is(true));
+
     }
 }

@@ -52,36 +52,16 @@ public class DeadlockTest {
     }
 
     @Test
-    public void multiThreaded2() throws InterruptedException {
-        ExecutorService executor = Executors.newFixedThreadPool(REPETITIONS);
-
-        for (int i = 0; i < REPETITIONS; i++) {
-            executor.execute(() -> {
-                trx1.transferFunds();
-            });
-            executor.execute(() -> {
-                trx2.transferFunds();
-            });
-        }
-
-        executor.shutdown();
-        boolean allJobsCompleted = executor.awaitTermination(1, TimeUnit.SECONDS);
-        assertThat("Deadlock detected", allJobsCompleted, is(true));
-        assertBalances();
-
-    }
-
-    @Test
     public void singleThreaded() {
-        final long startTime = System.currentTimeMillis();
+        //        final long startTime = System.currentTimeMillis();
 
         for (int i = 0; i < REPETITIONS; i++) {
             trx1.transferFunds();
             trx2.transferFunds();
         }
 
-        final long endTime = System.currentTimeMillis();
-        System.err.println("Total execution time: " + (endTime - startTime));
+        //        final long endTime = System.currentTimeMillis();
+        //        System.err.println("Total execution time: " + (endTime - startTime));
 
         assertBalances();
 

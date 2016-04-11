@@ -19,17 +19,6 @@ public class BankAccount {
         log("%s's account credited by %d. Balance is now %d", name, amount, balance);
     }
 
-    public void adjustBalance(int amount) {
-
-        balance += amount;
-        String description = amount > 0 ? "credited" : "debited";
-        log("%s's account %s by %d. Balance is now %d",
-                name,
-                description,
-                Math.abs(amount),
-                balance);
-    }
-
     public void debit(int amount) {
 
         balance -= amount;
