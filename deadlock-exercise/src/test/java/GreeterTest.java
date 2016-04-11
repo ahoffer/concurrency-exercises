@@ -15,12 +15,16 @@ public class GreeterTest {
 
     private static final int REPETITIONS = 4;
 
+    private static final String JACK = "Jack";
+
+    private static final String JILL = "Jill";
+
     private Greeter jack, jill;
 
     @Before
     public void setup() {
-        jack = new Greeter("Jack");
-        jill = new Greeter("Jill");
+        jack = new Greeter(JACK);
+        jill = new Greeter(JILL);
     }
 
     @Test

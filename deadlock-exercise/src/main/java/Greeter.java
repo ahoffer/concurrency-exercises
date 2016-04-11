@@ -19,7 +19,7 @@ public class Greeter {
     public void greet(Greeter greeted, List<String> recorder) {
 
         synchronized (this.getClass()) {
-            recorder.add(getMessage("greets ", greeted.name));
+            recorder.add(getMessage(false, "greets ", greeted.name));
             greeted.returnGreeting(this, recorder);
         }
     }
@@ -27,17 +27,17 @@ public class Greeter {
     //Remove the synchronized keyword to make the tests pass.
     public void returnGreeting(Greeter greeter, List<String> recorder) {
 
-        recorder.add(getMessage("returns the greeting", ""));
+        recorder.add(getMessage(true, "returns the greeting", ""));
 
     }
 
-    private String getMessage(String action, String directObject) {
-        String lastMessage = String.format("%,15d %s %s%s%n",
-                System.nanoTime(),
+    private String getMessage(boolean indent, String action, String directObject) {
+        String lastMessage = String.format("%s%s %s%s%n",
+                indent ? "\t" : "",
                 this.name,
                 action,
                 directObject);
-        System.out.println(lastMessage);
+        System.out.print(lastMessage);
         return lastMessage;
     }
 
