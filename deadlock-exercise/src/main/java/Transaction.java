@@ -26,15 +26,22 @@ public class Transaction {
 
             synchronized (toAccount) {
                 toAccount.credit(amount);
-                timestamp = new Date();
 
-                System.err.println(String.format("%s transfered %d from %s to %s%n",
-                        timestamp,
-                        amount,
-                        fromAccount.name,
-                        toAccount.name));
+                completeTransaction();
             }
         }
     }
 
+    private void completeTransaction() {
+        timestamp = new Date();
+        System.err.println(String.format("%s transfered %d from %s to %s%n",
+                timestamp,
+                amount,
+                fromAccount.name,
+                toAccount.name));
+    }
+
 }
+
+
+

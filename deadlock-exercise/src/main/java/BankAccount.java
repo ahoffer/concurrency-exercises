@@ -30,24 +30,10 @@ public class BankAccount {
                 balance);
     }
 
-    public  void debit(int amount) {
+    public void debit(int amount) {
 
         balance -= amount;
         log("%s's account debited by %d. Balance is now %d", name, amount, balance);
 
-
     }
-
-    public  void transferFundsTo(BankAccount recipient, int amount) {
-
-        recipient.receiveFundsFrom(this, amount);
-        adjustBalance(-amount);
-
-    }
-
-    public  void receiveFundsFrom(BankAccount recipient, int amount) {
-
-        adjustBalance(amount);
-    }
-
 }
