@@ -9,7 +9,7 @@ public class MySingleton {
     /**
      * The singleton variable
      */
-    static MySingleton instance = null;
+    static final MySingleton instance = new MySingleton();
 
     /**
      * Special values the singleton contains
@@ -32,9 +32,6 @@ public class MySingleton {
      * Get the singleton instance.
      */
     public static MySingleton getInstance() {
-        if (instance == null) {
-            instance = new MySingleton();
-        }
 
         return instance;
     }

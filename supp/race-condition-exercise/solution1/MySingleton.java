@@ -31,7 +31,7 @@ public class MySingleton {
     /**
      * Get the singleton instance.
      */
-    public static MySingleton getInstance() {
+    public synchronized static MySingleton getInstance() {
         if (instance == null) {
             instance = new MySingleton();
         }

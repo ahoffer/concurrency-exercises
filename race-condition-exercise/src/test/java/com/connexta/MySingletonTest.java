@@ -6,6 +6,8 @@ import static org.hamcrest.Matchers.everyItem;
 import static org.hamcrest.core.IsCollectionContaining.hasItem;
 import static org.hamcrest.core.IsNot.not;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
@@ -25,30 +27,30 @@ public class MySingletonTest {
 
     private static final int NUMBER_Of_THREADS = 5;
 
-    @Before
-    public void setUp() throws Exception {
-        MySingleton.reset();
-    }
-
+    /**
+     * TEST SINGLETON WITH MULTIPLE THREADS
+     */
     @Test
     public void testRaceCondition() throws InterruptedException {
 
         List<String> objectIds = getObjectIds();
         assertThat("The singleton instance ID cannot be unknown", objectIds, not(hasItem(UNKNOWN)));
+
         String currentSingletonId = MySingleton.getInstance()
                 .getObjectId();
         assertThat("The singleton must always have the same object ID",
                 objectIds,
                 everyItem(equalTo(currentSingletonId)));
 
+        // Make sure initialization code was fully executed.
         Integer lastNumber = MySingleton.getInstance()
                 .getLast();
         assertThat("Object was not initialized correctly", lastNumber, equalTo(EXPECTED_RESULT));
     }
 
-    /*
-     * Helper Methods
-     */
+    /**************************************************************************
+     * HELPER METHODS (IGNORE)
+     **************************************************************************/
     private String getObjectId(Future<MySingleton> future) {
         String objectId = UNKNOWN;
         try {
@@ -76,6 +78,35 @@ public class MySingletonTest {
                 .map(this::getObjectId)
                 .collect(Collectors.toList());
 
+    }
+
+    /**
+     * HIDE MESSY STUFF
+     *
+     * @throws Exception
+     */
+    @Before
+    public void setUp() throws Exception {
+        //Snag the static field "instance"
+        Field field = MySingleton.class.getDeclaredField("instance");
+        boolean isFinal = Modifier.isFinal(field.getModifiers());
+
+        //If not final, it is safe to reset it.
+        if (!isFinal) {
+            int originalModifiers = field.getModifiers();
+
+            //Remove final modifier if it exists
+            Field modifiersField = Field.class.getDeclaredField("modifiers");
+            modifiersField.setAccessible(true);
+            modifiersField.setInt(field, originalModifiers & ~Modifier.FINAL);
+
+            //Null out the singleton instance
+            field.set(null, null);
+
+            //Reset the modifiers
+            modifiersField.setInt(field, originalModifiers);
+
+        }
     }
 
 }

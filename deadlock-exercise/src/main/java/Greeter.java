@@ -18,6 +18,7 @@ public class Greeter {
     //A solution
     public void greet(Greeter greeted, List<String> recorder) {
 
+        //BEST SOLUTION
         synchronized (this.getClass()) {
             recorder.add(getMessage(false, "greets ", greeted.name));
             greeted.returnGreeting(this, recorder);
