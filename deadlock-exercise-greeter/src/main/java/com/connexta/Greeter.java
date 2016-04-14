@@ -1,3 +1,5 @@
+package com.connexta;
+
 import java.util.List;
 
 public class Greeter {
@@ -8,7 +10,7 @@ public class Greeter {
         this.name = name;
     }
 
-    //    public synchronized void greet(Greeter greeted, List<String> recorder) {
+    //    public synchronized void greet(com.connexta.Greeter greeted, List<String> recorder) {
     //
     //        recorder.add(getMessage("greets ", greeted.name));
     //        greeted.returnGreeting(this, recorder);
