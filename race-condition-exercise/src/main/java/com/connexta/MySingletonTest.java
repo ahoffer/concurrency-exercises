@@ -32,25 +32,6 @@ public class MySingletonTest {
     @Test
     public void testRaceCondition() throws InterruptedException {
 
-        // Initialization routine to be invoked when a Singleton instance is created
-        // TODO: I don't think I need to inject the initializer because I can cause the race condition without a Thread.sleep call.
-        Callable<UUID> initializer = () -> {
-            //Thread.sleep(30);
-            UUID id = UUID.randomUUID();
-            System.err.println(id);
-            return id;
-        };
-
-        //Do not use invokeAll. It interrupts the sleeping thread during debugging.
-        //List<Future<Singleton>> futures = executor.invokeAll(tasks, (long) 2, TimeUnit.SECONDS);
-
-        // This fails to create a race condition even though it submits jobs to an Executor.
-        //        List<UUID> ids = tasks.stream()
-        //                .map(executor::submit)
-        //                .map((f) -> extractSingletonId(f))
-        //                .collect(Collectors.toList());
-
-        // Parallel streams FTW!
         List<UUID> ids = IntStream.rangeClosed(1, NUMBER_Of_THREADS)
                 .parallel()
                 .mapToObj(i -> getSingletonInstance())

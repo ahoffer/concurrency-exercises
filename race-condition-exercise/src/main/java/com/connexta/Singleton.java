@@ -13,8 +13,9 @@ public abstract class Singleton {
     /**
      * Get the singleton instance.
      */
+    @SuppressWarnings("unused")
     public static Singleton getInstance(Callable<UUID> initializer) {
-        throw new RuntimeException("This method is abstact and should never be called");
+        throw new RuntimeException("This method is abstract and should never be called");
     }
 
     /**
