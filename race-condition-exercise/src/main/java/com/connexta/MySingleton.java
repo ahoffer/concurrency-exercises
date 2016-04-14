@@ -1,29 +1,29 @@
+/**
+ * INSTRUCTIONS
+ * <p>
+ * The singleton pattern is a design pattern that restricts the instantiation of a class to one
+ * object. This is useful when exactly one object is needed to coordinate actions across the
+ * system [Wikipedia].
+ * <p>
+ * This goal of this exercise is to modify this class so that it pass the automated unit tests.
+ * The unit tests include multiple threads trying to get the instance. By default the test
+ * fail because multiple threads are able to create difference instances, when only one should
+ * be created.
+ */
+
 package com.connexta;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-
-public class MySingleton {
+public class MySingleton extends Singleton {
 
     /**
      * The singleton variable
      */
-    static MySingleton instance = null;
-
-    /**
-     * Special values the singleton contains
-     */
-    private List<Integer> myNumbers;
-
-    /**
-     * Unique identification for the singleton instance
-     */
-    private UUID myId;
+    private static MySingleton instance = null;
 
     /**
      * Private constructor to prevent creation of new instances
      */
+    // TODO: Maybe this method can be pulled up?
     private MySingleton() {
         initialize();
     }
@@ -31,34 +31,13 @@ public class MySingleton {
     /**
      * Get the singleton instance.
      */
+    @SuppressWarnings("unused")
     public static MySingleton getInstance() {
+
         if (instance == null) {
             instance = new MySingleton();
         }
-
         return instance;
-    }
-
-    /**
-     * Set the initial values
-     */
-    private void initialize() {
-        myId = UUID.randomUUID();
-        myNumbers = new ArrayList<>();
-        myNumbers.add(1);
-        myNumbers.add(1);
-        for (int i = 2; i < 50; i++) {
-            myNumbers.add(myNumbers.get(i - 1) + myNumbers.get(i - 2));
-        }
-    }
-
-    public String getObjectId() {
-        return myId.toString();
-
-    }
-
-    Integer getLast() {
-        return myNumbers.get(myNumbers.size() - 1);
     }
 
 }
