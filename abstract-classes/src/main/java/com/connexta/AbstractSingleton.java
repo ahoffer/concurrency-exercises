@@ -5,14 +5,12 @@ import java.util.concurrent.Callable;
 
 public abstract class AbstractSingleton {
 
+    /**
+     * Unique identification for the singleton instance
+     */
     protected UUID id;
 
     /**
-     * Unique identification for the singleton instance
-     * <p>
-     * protected UUID id;
-     * <p>
-     * /**
      * Get the singleton instance.
      */
     @SuppressWarnings("unused")
@@ -21,7 +19,7 @@ public abstract class AbstractSingleton {
     }
 
     /**
-     * @return iOf UUID. The object's unique ID
+     * @return the object's unique ID
      */
     public UUID getId() {
         return id;
