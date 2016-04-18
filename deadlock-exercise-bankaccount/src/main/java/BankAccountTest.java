@@ -9,7 +9,7 @@ import java.util.concurrent.TimeUnit;
 import org.junit.Before;
 import org.junit.Test;
 
-public class DeadlockTest {
+public class BankAccountTest {
     private static final int REPETITIONS = 4;
 
     Transaction trx1, trx2;
@@ -59,9 +59,6 @@ public class DeadlockTest {
             trx1.transferFunds();
             trx2.transferFunds();
         }
-
-        //        final long endTime = System.currentTimeMillis();
-        //        System.err.println("Total execution time: " + (endTime - startTime));
 
         assertBalances();
 

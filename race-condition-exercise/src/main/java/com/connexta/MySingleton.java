@@ -13,7 +13,7 @@
 
 package com.connexta;
 
-public class MySingleton extends Singleton {
+public class MySingleton extends AbstractSingleton {
 
     /**
      * The singleton variable

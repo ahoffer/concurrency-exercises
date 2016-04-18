@@ -3,18 +3,20 @@ package com.connexta;
 import java.util.UUID;
 import java.util.concurrent.Callable;
 
-public abstract class Singleton {
+public abstract class AbstractSingleton {
 
-    /**
-     * Unique identification for the singleton instance
-     */
     protected UUID id;
 
     /**
+     * Unique identification for the singleton instance
+     * <p>
+     * protected UUID id;
+     * <p>
+     * /**
      * Get the singleton instance.
      */
     @SuppressWarnings("unused")
-    public static Singleton getInstance(Callable<UUID> initializer) {
+    public static AbstractSingleton getInstance(Callable<UUID> initializer) {
         throw new RuntimeException("This method is abstract and should never be called");
     }
 

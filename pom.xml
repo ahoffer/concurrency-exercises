@@ -20,9 +20,10 @@
         </plugins>
     </build>
     <modules>
-        <module>race-condition-exercise</module>
-        <module>deadlock-exercise-greeter</module>
+        <module>abstract-classes</module>
         <module>deadlock-exercise-bankaccount</module>
+        <module>deadlock-exercise-greeter</module>
+        <module>race-condition-exercise</module>
         <module>solutions</module>
     </modules>
     <dependencies>

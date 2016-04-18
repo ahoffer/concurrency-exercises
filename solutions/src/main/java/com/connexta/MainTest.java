@@ -4,12 +4,12 @@ import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
 import org.junit.runner.notification.Failure;
 
-public class MySingletonSolutionTest {
+public class MainTest {
 
     public static void main(String[] args) {
 
         Class[] classesUnderTest = new Class[] {MySingleton.class, MySingletonSolution1.class,
-                MySingletonSolution2.class};
+                MySingletonSolution2.class, Greeter.class};
 
         for (Class each : classesUnderTest) {
 
@@ -17,6 +17,7 @@ public class MySingletonSolutionTest {
             Result result = JUnitCore.runClasses(MySingletonTest.class);
             for (Failure failure : result.getFailures()) {
                 System.out.println("************************************************");
+                System.out.println("Test faiLed for " + each.getSimpleName());
                 System.out.println(failure.toString());
 
             }
@@ -27,6 +28,7 @@ public class MySingletonSolutionTest {
             }
         }
     }
+
 }
 
 

@@ -14,7 +14,6 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.List;
 import java.util.UUID;
-import java.util.concurrent.Callable;
 import java.util.stream.IntStream;
 
 import org.junit.Before;
@@ -35,12 +34,12 @@ public class MySingletonTest {
         List<UUID> ids = IntStream.rangeClosed(1, NUMBER_Of_THREADS)
                 .parallel()
                 .mapToObj(i -> getSingletonInstance())
-                .map(Singleton::getId)
+                .map(AbstractSingleton::getId)
                 .collect(toList());
 
         UUID currentSingletonId = getSingletonInstance().getId();
 
-        assertThat("Singleton ID cannot be null", currentSingletonId, not(nullValue()));
+        assertThat("com.connexta.Singleton ID cannot be null", currentSingletonId, not(nullValue()));
 
         assertThat("The singleton must always return the same instance of the object",
                 ids,
@@ -52,11 +51,11 @@ public class MySingletonTest {
      * HELPER METHODS (IGNORE)
      **************************************************************************/
 
-    private Singleton getSingletonInstance() {
-        Singleton singleton = null;
+    private AbstractSingleton getSingletonInstance() {
+        AbstractSingleton singleton = null;
         try {
             Method singletonGetter = classUnderTest.getDeclaredMethod("getInstance");
-            singleton = (Singleton) singletonGetter.invoke(null, null);
+            singleton = (AbstractSingleton) singletonGetter.invoke(null, null);
         } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
             fail("Internal test error");
 

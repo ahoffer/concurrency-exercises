@@ -16,6 +16,7 @@ import org.junit.Test;
 import com.connexta.Greeter;
 
 public class GreeterTest {
+    public static Class<?> classUnderTest = Greeter.class;
 
     private static final int REPETITIONS = 4;
 

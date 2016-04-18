@@ -1,6 +1,6 @@
 package com.connexta;
 
-public class MySingletonSolution2 extends Singleton {
+public class MySingletonSolution2 extends AbstractSingleton {
 
     /**
      * The singleton variable
