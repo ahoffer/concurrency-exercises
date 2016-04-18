@@ -13,23 +13,19 @@ import java.util.concurrent.TimeUnit;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.connexta.Greeter;
-
 public class GreeterTest {
-    public static Class<?> classUnderTest = Greeter.class;
-
     private static final int REPETITIONS = 4;
 
-    private static final String JACK = "Jack";
+    public static Class classUnderTest = Greeter.class;
 
-    private static final String JILL = "Jill";
-
-    private Greeter jack, jill;
+    private AbstractGreeter jack, jill;
 
     @Before
-    public void setup() {
-        jack = new Greeter(JACK);
-        jill = new Greeter(JILL);
+    public void setup() throws IllegalAccessException, InstantiationException {
+        jack = (AbstractGreeter) classUnderTest.newInstance();
+        jill = (AbstractGreeter) classUnderTest.newInstance();
+        jack.setName("Jack");
+        jill.setName("Jill");
     }
 
     @Test

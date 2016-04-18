@@ -18,6 +18,7 @@ public class MainTest {
         testSchedule.put(MySingletonTest.class,
                 new Class[] {MySingleton.class, MySingletonSolution1.class,
                         MySingletonSolution2.class});
+        testSchedule.put(GreeterTest.class, new Class[] {Greeter.class});
 
         // For each test class, run it with a different classUnderTest
         for (Map.Entry<Class, Class[]> pair : testSchedule.entrySet()) {

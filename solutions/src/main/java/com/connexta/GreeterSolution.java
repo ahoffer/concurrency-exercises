@@ -1,4 +1,4 @@
-package com.connexta;
-
-public class GreeterSolution extends AbstractGreeter {
-}
+//package com.connexta;
+//
+//public class GreeterSolution extends AbstractGreeter {
+//}

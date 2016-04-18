@@ -23,7 +23,7 @@ public class MySingletonTest {
 
     private static final int NUMBER_Of_THREADS = 5;
 
-    public static Class<?> classUnderTest = MySingleton.class;
+    public static Class classUnderTest = MySingleton.class;
 
     /**
      * TEST SINGLETON WITH MULTIPLE THREADS
@@ -39,7 +39,9 @@ public class MySingletonTest {
 
         UUID currentSingletonId = getSingletonInstance().getId();
 
-        assertThat("com.connexta.Singleton ID cannot be null", currentSingletonId, not(nullValue()));
+        assertThat("com.connexta.Singleton ID cannot be null",
+                currentSingletonId,
+                not(nullValue()));
 
         assertThat("The singleton must always return the same instance of the object",
                 ids,
