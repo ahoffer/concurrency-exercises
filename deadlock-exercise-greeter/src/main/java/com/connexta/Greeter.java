@@ -2,7 +2,7 @@ package com.connexta;
 
 import java.util.List;
 
-public class Greeter {
+public class Greeter extends AbstractGreeter {
 
     private String name;
 
