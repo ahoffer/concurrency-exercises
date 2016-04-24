@@ -8,16 +8,14 @@ public abstract class AbstractGreeter {
 
     public abstract void greet(AbstractGreeter greeted, List<String> recorder);
 
-    public abstract void returnGreeting(AbstractGreeter greeter, List<String> recorder);
+    protected abstract void returnGreeting(AbstractGreeter greeter, List<String> recorder);
 
     protected String getMessage(boolean indent, String action, String directObject) {
-        String lastMessage = String.format("%s%s %s%s%n",
+        return String.format("%s%s %s%s%n",
                 indent ? "\t" : "",
                 this.getName(),
                 action,
                 directObject);
-        System.out.print(lastMessage);
-        return lastMessage;
     }
 
     public String getName() {

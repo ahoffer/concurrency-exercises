@@ -23,7 +23,6 @@ public class MySingleton extends AbstractSingleton {
     /**
      * Private constructor to prevent creation of new instances
      */
-    // TODO: Maybe this method can be pulled up?
     private MySingleton() {
         initialize();
     }

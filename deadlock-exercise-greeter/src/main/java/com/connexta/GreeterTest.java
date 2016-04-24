@@ -5,7 +5,6 @@ import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -15,7 +14,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class GreeterTest {
-    private static final int REPETITIONS = 8;
+    private static final int REPETITIONS = 4;
 
     public static Class classUnderTest = Greeter.class;
 
@@ -33,7 +32,8 @@ public class GreeterTest {
     public void deadlock() throws InterruptedException {
 
         ExecutorService executor = Executors.newFixedThreadPool(REPETITIONS);
-        List<String> recorder = Collections.synchronizedList(new ArrayList<>());
+        //        List<String> recorder = Collections.synchronizedList(new ArrayList<>());
+        List<String> recorder = new ArrayList<>();
         for (int i = 0; i < REPETITIONS; i++) {
             executor.execute(() -> jack.greet(jill, recorder));
             executor.execute(() -> jill.greet(jack, recorder));
@@ -43,7 +43,7 @@ public class GreeterTest {
         boolean allJobsCompleted = executor.awaitTermination(2, TimeUnit.SECONDS);
         assertThat("Deadlock detected", allJobsCompleted, is(true));
 
-        String previousName = null, name, previousAction = null, action = null;
+        String previousName = null, person, previousAction = null, action = null;
         for (String line : recorder) {
             String[] words = getWords(line);
 
@@ -51,18 +51,22 @@ public class GreeterTest {
                 previousName = words[0];
                 previousAction = words[1];
             } else {
-                name = words[0];
+                person = words[0];
                 action = words[1];
-                boolean x = name.equals(previousName);
-                assertThat("Greeter names out of order", name, is(not(previousName)));
-                assertThat("Greetings actions out of order", action, is(not(previousAction)));
-                previousName = name;
+
+                if (action.equals("returns")) {
+                    assertThat("Greeter names out of order", person, is(not(previousName)));
+                    assertThat("Greetings actions out of order",
+                            previousAction,
+                            is(not("returns")));
+                }
+                previousName = person;
                 previousAction = action;
             }
         }
     }
 
-    String[] getWords(String input) {
+    private String[] getWords(String input) {
         return input.trim()
                 .split(" ");
     }

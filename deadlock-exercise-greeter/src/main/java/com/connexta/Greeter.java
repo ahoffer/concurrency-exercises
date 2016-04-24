@@ -12,7 +12,7 @@ public class Greeter extends AbstractGreeter {
     }
 
     @Override
-    public synchronized void returnGreeting(AbstractGreeter greeter, List<String> recorder) {
+    protected synchronized void returnGreeting(AbstractGreeter greeter, List<String> recorder) {
         recorder.add(getMessage(true, "returns the greeting", ""));
 
     }
