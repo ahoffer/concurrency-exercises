@@ -8,7 +8,7 @@ import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
 import org.junit.runner.notification.Failure;
 
-public class MainTest {
+public class AllTest {
 
     public static void main(String[] args) {
 
@@ -18,7 +18,8 @@ public class MainTest {
         testSchedule.put(MySingletonTest.class,
                 new Class[] {MySingleton.class, MySingletonSolution1.class,
                         MySingletonSolution2.class});
-        testSchedule.put(GreeterTest.class, new Class[] {Greeter.class});
+        testSchedule.put(GreeterTest.class,
+                new Class[] {Greeter.class, GreeterSolution1.class, GreeterSolution2.class});
 
         // For each test class, run it with a different classUnderTest
         for (Map.Entry<Class, Class[]> pair : testSchedule.entrySet()) {
@@ -30,17 +31,17 @@ public class MainTest {
         }
     }
 
-    public static void runTest(Class testClass, Class classUnderTest) {
+    private static void runTest(Class testClass, Class classUnderTest) {
         Result result = JUnitCore.runClasses(testClass);
         for (Failure failure : result.getFailures()) {
-            System.out.println("==================================================");
-            System.out.println("Test faiLed for " + classUnderTest.getSimpleName());
-            System.out.println(failure.toString());
+            System.err.println("==================================================");
+            System.err.println("Test faiLed for " + classUnderTest.getSimpleName());
+            System.err.println(failure.toString());
         }
 
         if (result.wasSuccessful()) {
-            System.out.println("-------------------------------------------------");
-            System.out.println("Test was successful for " + classUnderTest.getSimpleName());
+            System.err.println("-------------------------------------------------");
+            System.err.println("Test was successful for " + classUnderTest.getSimpleName());
         }
     }
 
@@ -49,9 +50,7 @@ public class MainTest {
             Field field = testClass.getDeclaredField("classUnderTest");
             Object oldValue = field.get(testClass);
             field.set(oldValue, classUnderTest);
-        } catch (NoSuchFieldException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
+        } catch (NoSuchFieldException | IllegalAccessException e) {
             e.printStackTrace();
         }
     }

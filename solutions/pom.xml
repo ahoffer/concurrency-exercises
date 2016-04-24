@@ -19,7 +19,7 @@
         </dependency>
         <dependency>
             <groupId>com.connexta</groupId>
-            <artifactId>deadlock-exercise</artifactId>
+            <artifactId>deadlock-exercise-greeter</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
@@ -33,7 +33,7 @@
                 <artifactId>exec-maven-plugin</artifactId>
                 <version>1.4.0</version>
                 <configuration>
-                    <mainClass>com.connexta.MainTest</mainClass>
+                    <mainClass>com.connexta.AllTest</mainClass>
                 </configuration>
             </plugin>
         </plugins>

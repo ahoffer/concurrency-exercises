@@ -2,6 +2,7 @@ package com.connexta;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.not;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -14,7 +15,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class GreeterTest {
-    private static final int REPETITIONS = 4;
+    private static final int REPETITIONS = 8;
 
     public static Class classUnderTest = Greeter.class;
 
@@ -39,8 +40,30 @@ public class GreeterTest {
         }
 
         executor.shutdown();
-        boolean allJobsCompleted = executor.awaitTermination(5, TimeUnit.SECONDS);
+        boolean allJobsCompleted = executor.awaitTermination(2, TimeUnit.SECONDS);
         assertThat("Deadlock detected", allJobsCompleted, is(true));
 
+        String previousName = null, name, previousAction = null, action = null;
+        for (String line : recorder) {
+            String[] words = getWords(line);
+
+            if (previousName == null) {
+                previousName = words[0];
+                previousAction = words[1];
+            } else {
+                name = words[0];
+                action = words[1];
+                boolean x = name.equals(previousName);
+                assertThat("Greeter names out of order", name, is(not(previousName)));
+                assertThat("Greetings actions out of order", action, is(not(previousAction)));
+                previousName = name;
+                previousAction = action;
+            }
+        }
+    }
+
+    String[] getWords(String input) {
+        return input.trim()
+                .split(" ");
     }
 }
