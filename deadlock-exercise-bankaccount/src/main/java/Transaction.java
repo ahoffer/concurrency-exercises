@@ -21,10 +21,10 @@ public class Transaction {
 
     public void transferFunds() {
 
-        synchronized (fromAccount) {
+        synchronized (toAccount) {
             fromAccount.debit(amount);
 
-            synchronized (toAccount) {
+            synchronized (fromAccount) {
                 toAccount.credit(amount);
 
                 completeTransaction();

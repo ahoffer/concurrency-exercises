@@ -13,7 +13,7 @@ public class BankAccount {
         System.err.println(String.format(msg, arguments));
     }
 
-    public synchronized void credit(int amount) {
+    public  void credit(int amount) {
 
         balance += amount;
         log("%s's account credited by %d. Balance is now %d", name, amount, balance);
