@@ -4,9 +4,8 @@ import java.util.List;
 
 public class GreeterSolution1 extends AbstractGreeter {
 
-
     @Override
-    public  void greet(AbstractGreeter greeted, List<String> recorder) {
+    public void greet(AbstractGreeter greeted, List<String> recorder) {
 
         synchronized (this.getClass()) {
             recorder.add(getMessage(false, "greets ", greeted.getName()));
