@@ -11,4 +11,4 @@ Running the unit tests will reault in failure because of the
 deadlock. The goal of the exercise is to modify the <b>Greeter</b>
 class to resolve the deadlock and pass the unit tests.
 
-Do not modify the unit tests or any classes other than <b>Greeter</b>
+Do not modify the unit tests or any classes other than <b>Greeter</b>.
