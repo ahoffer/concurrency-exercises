@@ -21,8 +21,7 @@
     </build>
     <modules>
         <module>abstract-classes</module>
-        <module>deadlock-exercise-bankaccount</module>
-        <module>deadlock-exercise-greeter</module>
+        <module>deadlock-exercise</module>
         <module>race-condition-exercise</module>
         <module>solutions</module>
     </modules>

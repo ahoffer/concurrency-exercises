@@ -19,7 +19,7 @@
         </dependency>
         <dependency>
             <groupId>com.connexta</groupId>
-            <artifactId>deadlock-exercise-greeter</artifactId>
+            <artifactId>deadlock-exercise</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
