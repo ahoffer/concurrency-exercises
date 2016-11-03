@@ -24,14 +24,13 @@ If multiple threads access the constructor simultaneously, additional instances 
 ```
 
 The constructor calls an initialization method:
-
 ```java
 private MySingleton() {
         initialize();
     }
 ```
 
-The initialization methods is deliberately long running to increase the change that multithreads will create multiple instances of the singleton.
+The initialization methods is deliberately long running to increase the chance that more than one thread creates an instance of the singleton.
 
 ### Solution 1: synchronization
 
@@ -41,7 +40,7 @@ A simple solution is to add the key word `syncrhonized` to the `getInstance` met
 public synchronized static MySingleton getInstance() {
 ```
 
-The synchronization keyword only allows one thread at a time to enter the method.
+The synchronize keyword only allows one thread at a time to enter the method.
 
 ### Solution 2: static initialization
 

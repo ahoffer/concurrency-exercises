@@ -32,7 +32,6 @@ public class GreeterTest {
     public void deadlock() throws InterruptedException {
 
         ExecutorService executor = Executors.newFixedThreadPool(REPETITIONS);
-        //        List<String> recorder = Collections.synchronizedList(new ArrayList<>());
         List<String> recorder = new ArrayList<>();
         for (int i = 0; i < REPETITIONS; i++) {
             executor.execute(() -> jack.greet(jill, recorder));
