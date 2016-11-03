@@ -4,6 +4,8 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
@@ -42,6 +44,8 @@ public class GreeterTest {
         boolean allJobsCompleted = executor.awaitTermination(2, TimeUnit.SECONDS);
         assertThat("Deadlock detected", allJobsCompleted, is(true));
 
+        printRecorderToConsole(recorder);
+
         String previousName = null, person, previousAction = null, action = null;
         for (String line : recorder) {
             String[] words = getWords(line);
@@ -62,6 +66,15 @@ public class GreeterTest {
                 previousName = person;
                 previousAction = action;
             }
+        }
+    }
+
+    private void printRecorderToConsole(List<String> recorder) {
+        System.out.println(
+                "  CONVERSATION - " + DateTimeFormatter.ofPattern("hh:mm:ss").format(LocalDateTime.now()));
+        System.out.println("===========================");
+        for (String each : recorder) {
+            System.out.println(each);
         }
     }
 
