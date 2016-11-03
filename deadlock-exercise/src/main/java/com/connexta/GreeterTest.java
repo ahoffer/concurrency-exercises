@@ -46,7 +46,7 @@ public class GreeterTest {
 
         printRecorderToConsole(recorder);
 
-        String previousName = null, person, previousAction = null, action = null;
+        String previousName = null, person, previousAction = null, action;
         for (String line : recorder) {
             String[] words = getWords(line);
 
@@ -70,8 +70,8 @@ public class GreeterTest {
     }
 
     private void printRecorderToConsole(List<String> recorder) {
-        System.out.println(
-                "  CONVERSATION - " + DateTimeFormatter.ofPattern("hh:mm:ss").format(LocalDateTime.now()));
+        System.out.println("  CONVERSATION - " + DateTimeFormatter.ofPattern("hh:mm:ss")
+                .format(LocalDateTime.now()));
         System.out.println("===========================");
         for (String each : recorder) {
             System.out.println(each);
